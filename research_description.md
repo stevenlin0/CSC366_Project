@@ -16,7 +16,7 @@ One of the most notable parts of Taylor's analysis is her focus on player aging 
 
 Although Taylor's work is valuable, it also has limitations that matter for our project. Her study ends at 2015, meaning it predates the analytics boom that transformed how teams measure performance. She also uses WAR but does not compare different WAR systems like Baseball-Reference vs. Fangraphs, which is something we plan to explore. Her dissertation provides a strong foundation, but there is still room to update and expand the research using modern data and metrics.
 
-### [2] Turvey, J. (2013). The future of baseball contracts: a look at the growing trend in long-term contracts. The Baseball Research Journal, 42(2), 101+. https://link.gale.com/apps/doc/A351434908/AONE?u=sunyfarm_main&sid=googleScholar&xid=a8aaa753
+### [2] Turvey, J. (2013). The future of baseball contracts: a look at the growing trend in long-term contracts. The Baseball Research Journal, 42(2), 101+.
 
 Turvey's article provides important context about how MLB long-term contracts evolved over time. Instead of focusing solely on performance, he looks at economic and structural trends within the sport. He explains why teams increasingly began offering longer contracts, how average annual value (AAV) expanded over the years, and what financial risks and benefits teams consider when negotiating these deals. His analysis helps explain the environment that created the types of contracts we are studying.
 
