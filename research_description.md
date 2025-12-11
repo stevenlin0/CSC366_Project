@@ -20,7 +20,7 @@ We evaluate whether guaranteed long-term contracts in Major League Baseball (MLB
 ## FEATURE SELECTION
 
 **Independent Variable:**  
-- Contract cost measured by Average Annual Value (inflation effects minimized by focusing on 2005–2025
+Contract cost measured by Average Annual Value (inflation effects minimized by focusing on 2005–2025
 
 **Dependent Variables:**  
 Cumulative WAR during the contract window; hitter slash-line metrics (AVG/OBP/SLG/OPS, wRC+) and pitcher run-prevention proxies embedded in the dataset.
