@@ -1,50 +1,79 @@
-# MLB Long-Term Contracts Research Project
+# Do Higher Salaries Predict Better MLB Player Performance in the Last 20 Years?
 
-## Research Question
+Vincent Bonamassa, Steven Lin, Aamina Mokhtar
 
-We are researching the question of Major League Baseball contracts and how well they result. We use a bunch of commonly used statistics to determine whether long term contracts are generally a good idea or a bad idea. We did not look at rookie contracts or players that were in arbitration because there is no standardized AAV for arbitration and for rookies, they make the league minimum.
+---
 
-Of course, we are not the first ones to look at this topic.
+## INTRODUCTION
 
-## Resources
+MLB clubs spend billions on guaranteed deals expecting elite performance, yet aging curves, injuries, and role-specific volatility can break the link between pay and production. Taylor (2016) documented post-contract performance declines and aging effects for long-term deals, establishing WAR as a core evaluation metric but stopped at 2015 and did not compare WAR models. Turvey (2013) explained why teams embraced long contracts—front-loading competitive advantage while tolerating inefficiency later—but did not test whether value was realized. O'Neill (2014) found evidence of "contract-year bumps" in hitter performance, suggesting motivation spikes before payday yet leaving open whether production persists afterward.
+Our project updates contract-performance analysis for the 2005–2025 window, compares hitter/pitcher dynamics, and quantifies surplus value using the commonly cited $8M-per-WAR benchmark. We only focused on players who have long term contracts. We did not calculate players currently under arbitration or making rookie salary.
 
-### [1] Taylor, Z. (2016). An Analysis of the Effects of Long-Term Contracts on Performance in Major League Baseball (Doctoral dissertation).
+---
 
-Taylor's dissertation focuses specifically on how MLB players perform after signing long-term contracts, which makes it highly relevant to our topic. Her work pulls together multiple years of contract and performance data, looking at how guaranteed money and contract length relate to player motivation and output. She examines patterns such as whether players tend to decline once they obtain financial security or whether certain types of players remain productive across longer time spans. The study uses WAR (Wins Above Replacement), batting performance measures, and pitching metrics to evaluate the trends.
+## ABSTRACT
 
-One of the most notable parts of Taylor's analysis is her focus on player aging curves. She observes that many players experience decline as they move into the later years of their careers, which often overlaps with the later years of long-term contracts. This finding aligns with common expectations in baseball economics but also shows how performance changes can vary depending on the player's role or position. While the study identifies drop-offs, Taylor also points out exceptions: certain elite players outperform expectations even deep into long-term deals, suggesting that the relationship is more nuanced than just "contracts cause declines."
+We evaluate whether guaranteed long-term contracts in Major League Baseball (MLB) translate into on-field production that justifies their cost. Using a curated sample of 28 prominent multi-year deals signed between 2005 and 2025, we pair Baseball-Reference/FanGraphs performance data with contract terms (Average Annual Value, AAV). After cleaning the dataset (removing blank rows, coercing numeric fields, and tagging hitters vs. pitchers), we examine the salary-to-performance relationship using WAR-based efficiency metrics, Pearson correlations, and visual analytics. Results show only a moderate overall correlation (r = 0.40), with hitters exhibiting a tighter salary-performance fit (r = 0.64) than pitchers (r = 0.25). Translating WAR into market value (1 WAR ≈ $8M) reveals that only about half of the sampled contracts generated positive surplus, highlighting the risk embedded in pitcher investments. These findings help teams contextualize how modern mega-deals age during the analytics era.
 
-Although Taylor's work is valuable, it also has limitations that matter for our project. Her study ends at 2015, meaning it predates the analytics boom that transformed how teams measure performance. She also uses WAR but does not compare different WAR systems like Baseball-Reference vs. Fangraphs, which is something we plan to explore. Her dissertation provides a strong foundation, but there is still room to update and expand the research using modern data and metrics.
+---
 
-### [2] Turvey, J. (2013). The future of baseball contracts: a look at the growing trend in long-term contracts. The Baseball Research Journal, 42(2), 101+.
+## FEATURE SELECTION
 
-Turvey's article provides important context about how MLB long-term contracts evolved over time. Instead of focusing solely on performance, he looks at economic and structural trends within the sport. He explains why teams increasingly began offering longer contracts, how average annual value (AAV) expanded over the years, and what financial risks and benefits teams consider when negotiating these deals. His analysis helps explain the environment that created the types of contracts we are studying.
+**Independent Variable:**  
+- Contract cost measured by Average Annual Value (inflation effects minimized by focusing on 2005–2025
 
-Turvey also highlights how free agency and team budgeting strategies changed in the early 2010s. For example, teams became more willing to "overpay" in later years of a contract as long as they could get high performance during the early seasons. This is important for our research because it suggests that long-term deals are not only about matching salary to performance, but they are also about timing and strategic roster building. Teams often knowingly accept inefficiency at the back end of a contract in exchange for stability or competitive edge at the front.
+**Dependent Variables:**  
+Cumulative WAR during the contract window; hitter slash-line metrics (AVG/OBP/SLG/OPS, wRC+) and pitcher run-prevention proxies embedded in the dataset.
 
-However, Turvey's paper remains mostly descriptive. He does not attempt to evaluate whether the players actually lived up to the projected value of their contracts. He does not use metrics like WAR, OPS+, ERA+, or salary-per-WAR ratios. His work gives a big-picture view of how long-term contracts became common, but it stops short of quantifying how well these contracts perform in practice. That gap is where our project steps in.
+**Procedure:**  
+After cleaning, we segmented hitters vs. pitchers, computed summary stats, and ran Pearson correlations between WAR and AAV. Salary efficiency and surplus metrics were derived to contextualize value. Visuals (scatter, box plot, timeline) were produced via poster_analysis.py.
 
-### [3] O'Neill, H. (2014). "Do Major League Baseball hitters come up big in their contract year?" SABR Research Journal.
+---
 
-O'Neill's study looks at player behavior right before a contract is signed, that being the "contract year." He analyzes whether hitters tend to increase their performance when they know they are about to enter free agency or negotiate a new deal. Using adjusted OPS metrics (OPS100), he finds that many hitters do show a modest increase in productivity during their contract year. This suggests that money can be a motivating factor and that players respond to financial incentives when they are on the verge of payday.
+## MODELS USED / FINDINGS
 
-Another important contribution from O'Neill is how he controls for other factors that could affect contract-year performance. He accounts for playing time, aging, and retirement decisions, and he uses fixed-effects regression to isolate the contract-year effect. This strengthens the credibility of his results, making the paper a reliable source for understanding incentive-related performance patterns. His findings show that players can elevate their performance when their next contract is on the line.
+We were able to scrape our data from the internet. There is a program out there called pybaseball that we installed with pip and it automatically scrapes from a website called Fangraphs, which has descriptive data of all relevant statistics, including WAR which is our main focus to determine contract value.
 
-Despite the strengths of this paper, it only examines performance before a contract is signed. It does not explore whether players maintain, exceed, or fall below expectations after signing a long-term deal. In fact, the contract-year bump that O'Neill documents could be interpreted as temporary, a burst of effort that may or may not carry over into the first or later years of a long commitment. This question remains open, and it supports the need for our project's focus on performance during long-term contracts rather than leading up to them.
+| Corr(AAV, WAR) | Mean AAV (M)|MeanWAR|Mean/WAR | Mean Surplus ($M) |
 
-## Existing Findings and Metrics We Can Build On
+| Overall | 0.40 | 19.4 | 9.0 | 3.6 | +52.5 |
 
-There are several findings from earlier research that give us a helpful starting point for our project. Taylor's study on long-term MLB contracts shows how performance can change over the years and highlights the importance of using metrics like WAR to evaluate value. Turvey's work explains how long-term contracts became more common and why teams started committing larger amounts of money to players. These two sources give us background on both the performance side and the economic side of MLB contracts, which makes it easier for us to understand the environment we're working with.
+| Hitters | 0.64 | 19.7 | 10.5 | 2.2 | +64.3 |
 
-We also have reliable datasets available through Baseball-Reference and FanGraphs, which provide season-by-season statistics, salaries, and advanced metrics such as WAR, OPS+, and ERA+. These databases are widely used by analysts, journalists, and researchers, so they give us trustworthy numbers to build our analysis on. Since our project covers the last 20 years, these sources are particularly useful because they offer consistent, modern data that fits the metrics teams rely on today.
+| Pitchers | 0.25 | 19.2 | 7.6 | 4.7 | +41.5 |
 
-Altogether, the previous research and the data we have access to give us a solid foundation to build on. They point us toward which statistics matter most, how contracts are usually evaluated, and what trends have already been observed. This helps guide our project and makes sure we are focusing on questions that are relevant to understanding player value under long-term MLB contracts.
+Top Surplus Deals: Max Scherzer (2015–18), Freddie Freeman (2022–25), Marcus Semien (2022–25).
 
-## Gaps/Open Questions Our Project Addresses
+Negative Surplus Deals: Pablo Sandoval (2015–18), Yasmany Tomas (2015–18), James Shields (2015–18), Jacob deGrom (2023–25 expected shortfall due to injuries).
 
-Even though previous studies give us a good foundation, there are still a few areas that haven't been explored in much detail and that our project is able to expand on. Most of the existing research focuses on older contract periods or broader economic trends, but there is less work that looks closely at the performance of players under long-term contracts in the modern analytics era. Because the game has changed a lot in the last 20 years, especially with how teams evaluate players, there is room to update these findings using more recent data and advanced metrics.
+Insight: Even when overall surplus is positive, the risk profile diverges sharply by position—pitcher variance and health setbacks erode value faster than hitter aging.
 
-Another open question involves how consistent a player's value is throughout the entire length of a long-term contract. Past studies talk about contract-year motivation or early performance, but they don't really break down how performance changes from the first year to the last year of a deal. This makes it harder to tell whether teams are getting steady value or if most of the value comes early on. Our project also adds something new by comparing different versions of WAR from Baseball Reference and FanGraphs, since each uses its own method. Seeing how these two systems line up or differ gives us a clearer picture of how performance and salary relate.
+---
 
-Overall, the gaps that exist are not major problems but rather opportunities for us to bring the research up to date and look at contract performance in a way that fits how MLB operates today. Our dataset lets us answer these questions, and the metrics we're using help us get a more detailed understanding of contract value than what appears in most earlier studies.
+## CONCLUSIONS
 
+Higher salaries do not guarantee proportionally higher WAR. The moderate correlation and numerous underperforming contracts suggest teams often overpay for projected, not realized, production.
+
+Hitters with strong on-base skills maintain value deeper into contracts, supporting the strategy of investing in defensive/plate-discipline profiles.
+
+Pitcher deals require built-in risk mitigation (opt-outs, staggered payments) given the low correlation and high dispersion in $/WAR.
+
+---
+
+## FUTURE DIRECTIONS
+
+Expand the dataset to include shorter deals and arbitration outcomes to test whether team-controlled years subsidize long-term investments.
+
+Compare Baseball Reference vs. FanGraphs WAR to quantify model sensitivity.
+
+Incorporate injury days lost and aging-curve modeling (e.g., spline regression) to predict when surplus flips negative.
+
+---
+
+## REFERENCES
+
+Taylor, Z. (2016). An Analysis of the Effects of Long-Term Contracts on Performance in Major League Baseball (Doctoral dissertation).
+
+Turvey, J. (2013). "The future of baseball contracts: a look at the growing trend in long-term contracts." Baseball Research Journal, 42(2), 101+.
+
+O'Neill, H. (2014). "Do Major League Baseball hitters come up big in their contract year?" SABR Research Journal.
